@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
@@ -14,9 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-       return  Product::all();
+        // Paginate the products with 20 products per page
+        $products = Product::paginate(20);
+        
+        // Instantiate ProductCollection and pass the paginated collection of products to it
+        return new ProductCollection($products);
     }
-
     /**
      * Show the form for creating a new resource.
      */
