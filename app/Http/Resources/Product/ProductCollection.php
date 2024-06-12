@@ -17,6 +17,7 @@ class ProductCollection extends ResourceCollection
     {
         return $this->collection->map(function ($request) {
             return [
+                
                 'name' => $request->name,
                 'discounts'      => $request->discounts,
                 'totalPrice' => round((1 - ($request->discounts / 100)) * $request->price, 2),
